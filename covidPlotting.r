@@ -46,5 +46,3 @@ ggplot(forplot,aes(Day)) +
   geom_line(aes(y = Logistic, color = "Logistics Curve Fit"),lwd=1.1) +
   labs(title = "NOVA Actual Cumulative and Logistics Function Fit for Covid-19 Cases", 
        x = "Days since March 8, 2020", y = "Cumulative Confirmed Cases")
-
-
