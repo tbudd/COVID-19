@@ -29,17 +29,19 @@ accSubtrahend <- accSubtrahend[1:length(accSubtrahend)-1]
 covid['acceleration'] <- (covid$velocity - accSubtrahend)
 
 # curve fit
-covid.fit<-curvefit(covid$seq,covid$cumulative, extrapol = 20, plot.curves = FALSE)
+covid.fit<-curvefit(covid$seq,covid$cumulative, extrapol = 7, plot.curves = FALSE)
 
 # create plotting dataframe from curve fitting results only for actual Cumulative and Logistics fit
 forplot <- data.frame(covid.fit$models_y[,1],covid.fit$models_y[,2],covid.fit$models_y[,6])
 colnames(forplot) <- c("Day","Cumulative","Logistic")
 
 ggplot(covid,aes(x = Date, y = velocity)) + geom_line(lwd = 1.1) +
-  labs(title = "NOVA Covid-19 Cases Velocity")
+  labs(title = "NOVA Covid-19 Cases Velocity") +
+  geom_smooth()
 
 ggplot(covid,aes(x = Date, y = acceleration)) + geom_line(lwd = 1.1) +
-  labs(title = "NOVA Covid-19 Cases Acceleration")
+  labs(title = "NOVA Covid-19 Cases Acceleration") +
+  geom_smooth()
 
 ggplot(forplot,aes(Day)) + 
   geom_line(aes(y = Cumulative, color = "Actual"),lwd=1.1) + 
